@@ -44,3 +44,25 @@ src/main/java/br/com/crm/crmemprestimos
 ├── exception         # Tratamento de erros
 └── CrmEmprestimosApplication.java
 ```
+
+---
+
+## 🧠 **Funcionalidades implementadas**
+
+## 👤 **Clientes**
+
+- **Criar cliente**
+- **Listar clientes**
+
+## 💰 **Empréstimos**
+
+- **Criar empréstimo vinculado a um cliente**
+- **Geração automática das parcelas**
+- **Listar empréstimos**
+- **Encerrar empréstimo**
+
+## 📆 **Parcelas**
+
+- **Listar parcelas por empréstimo**
+- **Registrar pagamento de parcela**
+- **Atualização automática de status** - **PENDENTE** - **PAGA** - **ATRASADA**
