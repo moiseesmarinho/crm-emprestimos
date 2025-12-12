@@ -1,0 +1,127 @@
+### Listar todos os clientes
+GET http://localhost:8080/clientes
+
+### Buscar cliente por ID
+GET http://localhost:8080/clientes/1
+
+### Criar novo cliente (CPF)
+POST http://localhost:8080/clientes
+Content-Type: application/json
+
+{
+  "nomeCompleto": "João da Silva",
+  "cpfCnpj": "123.456.789-09",
+  "telefone": "(11) 98765-4321",
+  "email": "joao.silva@exemplo.com",
+  "endereco": "Rua das Flores, 123 - Centro, São Paulo/SP",
+  "observacoes": "Cliente preferencial"
+}
+
+### Criar novo cliente (CNPJ)
+POST http://localhost:8080/clientes
+Content-Type: application/json
+
+{
+  "nomeCompleto": "Empresa XYZ Ltda",
+  "cpfCnpj": "12.345.678/0001-90",
+  "telefone": "(11) 3456-7890",
+  "email": "contato@xyz.com.br",
+  "endereco": "Av. Paulista, 1000 - Bela Vista, São Paulo/SP",
+  "observacoes": "Cliente corporativo"
+}
+
+### Atualizar cliente
+PUT http://localhost:8080/clientes/1
+Content-Type: application/json
+
+{
+  "nomeCompleto": "João da Silva Santos",
+  "cpfCnpj": "123.456.789-09",
+  "telefone": "(11) 98765-4321",
+  "email": "joao.silva.santos@exemplo.com",
+  "endereco": "Rua das Flores, 123 - Centro, São Paulo/SP",
+  "observacoes": "Cliente preferencial - Atualizado"
+}
+
+### Deletar cliente
+DELETE http://localhost:8080/clientes/1
+
+package br.com.crm.crmemprestimos.controller;
+
+import br.com.crm.crmemprestimos.model.Parcela;
+import br.com.crm.crmemprestimos.service.ParcelaService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/parcelas")
+public class ParcelaController {
+
+    private final ParcelaService parcelaService;
+
+    public ParcelaController(ParcelaService parcelaService) {
+        this.parcelaService = parcelaService;
+    }
+
+    // POST /parcelas/emprestimos/{emprestimoId}
+    @PostMapping("/emprestimos/{emprestimoId}")
+    public ResponseEntity<Parcela> criar(@PathVariable Long emprestimoId,
+                                         @RequestBody Parcela parcela) {
+        Parcela salva = parcelaService.criar(emprestimoId, parcela);
+        return ResponseEntity.ok(salva);
+    }
+
+    // GET /parcelas
+    @GetMapping
+    public ResponseEntity<List<Parcela>> listarTodas() {
+        return ResponseEntity.ok(parcelaService.listarTodas());
+    }
+
+    // GET /parcelas/{id}
+    @GetMapping("/{id}")
+    public ResponseEntity<Parcela> buscarPorId(@PathVariable Long id) {
+        try {
+            Parcela parcela = parcelaService.buscarPorId(id);
+            return ResponseEntity.ok(parcela);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // GET /parcelas/emprestimos/{emprestimoId}
+    @GetMapping("/emprestimos/{emprestimoId}")
+    public ResponseEntity<List<Parcela>> listarPorEmprestimo(@PathVariable Long emprestimoId) {
+        try {
+            List<Parcela> parcelas = parcelaService.listarPorEmprestimo(emprestimoId);
+            return ResponseEntity.ok(parcelas);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // PUT /parcelas/{id}
+    @PutMapping("/{id}")
+    public ResponseEntity<Parcela> atualizar(@PathVariable Long id,
+                                             @RequestBody Parcela dadosAtualizados) {
+        try {
+            Parcela atualizada = parcelaService.atualizar(id, dadosAtualizados);
+            return ResponseEntity.ok(atualizada);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // DELETE /parcelas/{id}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        try {
+            parcelaService.deletar(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
+

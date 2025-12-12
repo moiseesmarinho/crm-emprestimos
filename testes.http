@@ -1,0 +1,83 @@
+###############################################################
+### 1. CLIENTES
+###############################################################
+
+### Listar todos os clientes
+GET http://localhost:8080/clientes
+Accept: application/json
+
+### Buscar cliente por ID
+GET http://localhost:8080/clientes/4
+Accept: application/json
+
+### Criar cliente
+POST http://localhost:8080/clientes
+Content-Type: application/json
+
+{
+  "nomeCompleto": "João Silva",
+  "cpfCnpj": "123.456.789-09",
+  "email": "joao.silva@email.com",
+  "telefone": "(11) 98765-4321",
+  "endereco": "Rua das Flores, 123, Centro, São Paulo - SP",
+  "observacoes": "Cliente teste criado pelo REST Client"
+}
+
+### Atualizar cliente
+PUT http://localhost:8080/clientes/4
+Content-Type: application/json
+
+{
+  "nomeCompleto": "João Silva Atualizado",
+  "cpfCnpj": "123.456.789-09",
+  "email": "joao.silva.atualizado@email.com",
+  "telefone": "(11) 90000-0000",
+  "endereco": "Av. Paulista, 1000, São Paulo - SP",
+  "observacoes": "Cliente atualizado pelo REST Client"
+}
+
+### Deletar cliente
+DELETE http://localhost:8080/clientes/4
+Accept: application/json
+
+###############################################################
+### 2. EMPRESTIMOS
+###############################################################
+
+### Listar todos os emprestimos
+GET http://localhost:8080/emprestimos
+Accept: application/json
+
+### Buscar emprestimo por ID
+GET http://localhost:8080/emprestimos/1
+Accept: application/json
+
+### Criar emprestimo
+POST http://localhost:8080/emprestimos
+Content-Type: application/json
+
+{
+  "clienteId": 4,
+  "valorPrincipal": 5000.00,
+  "taxaJurosMensal": 3.50,
+  "quantidadeParcelas": 10,
+  "dataPrimeiroVencimento": "2026-01-10",
+  "observacoes": "Empréstimo de teste"
+}
+
+### Atualizar emprestimo
+PUT http://localhost:8080/emprestimos/1
+Content-Type: application/json
+
+{
+  "clienteId": 4,
+  "valorPrincipal": 6000.00,
+  "taxaJurosMensal": 3.80,
+  "quantidadeParcelas": 12,
+  "dataPrimeiroVencimento": "2026-02-10",
+  "observacoes": "Empréstimo atualizado pelo REST Client"
+}
+
+### Deletar emprestimo
+DELETE http://localhost:8080/emprestimos/1
+Accept: application/json
