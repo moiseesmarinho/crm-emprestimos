@@ -66,3 +66,34 @@ src/main/java/br/com/crm/crmemprestimos
 - **Listar parcelas por empréstimo**
 - **Registrar pagamento de parcela**
 - **Atualização automática de status** - **PENDENTE** - **PAGA** - **ATRASADA**
+
+---
+
+🗄️ **Banco de dados**
+
+- **PostgreSQL**
+- **Mapeamento via JPA/Hibernate**
+- **Relacionamentos:**
+  - **Cliente** → **Empréstimos**
+  - **Empréstimo** → **Parcelas**
+
+---
+
+📌 **Status do projeto**
+
+✅ **Back-end finalizado e totalmente funcional**
+
+🔮 **Próximos passos**
+
+- **Frontend** _(Angular ou React)_
+
+---
+
+👨‍💻 **Autor**
+
+**Moisés Marinho**
+Estudante de **Análise e Desenvolvimento de Sistemas**
+**Back-end Java | Spring Boot**
+
+🔗 **GitHub:** *https://github.com/moiseesmarinho*
+🔗 **LinkedIn:** *https://www.linkedin.com/in/moiseesmarinho/*
